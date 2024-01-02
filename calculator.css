@@ -1,0 +1,46 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: solid 1px black;
+
+}
+
+.body {
+    width: 400px;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.display {
+    width: 100%;
+    height: 100px;
+    padding: 8px;
+    font-size: 64px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+}
+
+.buttons_last-row :first-child{
+    flex-grow: 1;
+}
+
+.btn {
+    width: 25%;
+    height: 78px;
+    border-radius: 5%;
+    font-size: large;
+}
+
