@@ -1,13 +1,20 @@
 let numObj = {};
 const display = document.querySelector(".display");
-
 const btn = document.querySelectorAll(".btn");
 
-btn.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    const input = e.target.innerText;
+// Keyboard inputs
+addEventListener('keypress', (e) => inputEventFunction(e))
 
-    if (input === "=") {
+// Button click inputs
+btn.forEach((btn) => {
+  btn.addEventListener("click", inputEventFunction);
+});
+
+// Callback function
+function inputEventFunction(e) {
+    const input = e.key || e.target.innerText;
+
+    if (input === "=" || input === "Enter") {
       display.innerText = parseFloat(operate(numObj).toFixed(9));
       return clearDisplay();
     }
@@ -36,8 +43,7 @@ btn.forEach((btn) => {
     }
 
     console.log(numObj);
-  });
-});
+}
 
 function addNumToObject(obj, string, input) {
   if (!obj[string]) obj[string] = 0;
