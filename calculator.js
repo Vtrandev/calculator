@@ -7,9 +7,16 @@ btn.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const input = e.target.innerText;
 
-    if (input == "=") {
-      display.innerText = operate(numObj);
+    if (input === "=") {
+      display.innerText = parseFloat(operate(numObj).toFixed(9));
       return clearDisplay();
+    }
+
+    if (numObj["operator"] && ["+", "-", "/", "*"].includes(input)) {
+      numObj["first"] = operate(numObj);
+      numObj["operator"] = input;
+      delete numObj["second"];
+      return display.innerText = numObj["first"];
     }
 
     if (input === "AC") {
@@ -20,12 +27,12 @@ btn.forEach((btn) => {
     // Add numbers and operator to the object
     if (numObj["operator"]) {
       addNumToObject(numObj, "second", input);
-      display.innerText = parseInt(numObj["second"]);
-    } else if (parseInt(input)) {
-      addNumToObject(numObj, "first", input);
-      display.innerText = parseInt(numObj["first"]);
-    } else {
+      display.innerText = parseFloat(numObj["second"]);
+    } else if (["+", "-", "/", "*"].includes(input)) {
       numObj["operator"] = input;
+    } else {
+      addNumToObject(numObj, "first", input);
+      display.innerText = parseFloat(numObj["first"]);
     }
 
     console.log(numObj);
@@ -59,7 +66,7 @@ function multiply(obj) {
 }
 
 function divide(obj) {
-    return +obj["first"] / +obj["second"];
+  return +obj["first"] / +obj["second"];
 }
 
 // Clearing Display function
