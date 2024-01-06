@@ -3,14 +3,23 @@ const display = document.querySelector(".display");
 const btn = document.querySelectorAll(".btn");
 
 // Keyboard inputs
-addEventListener("keypress", (e) => inputEventFunction(e));
+addEventListener("keypress", inputEventFunction);
 
 // Button click inputs
-btn.forEach((btn) => btn.addEventListener("click", inputEventFunction));
+btn.forEach((btn) =>
+  btn.addEventListener("click", (e) => {
+    btn.classList.add("click-active");
+    inputEventFunction(e);
+    setTimeout(() => {
+      btn.classList.remove("click-active");
+    }, 100);
+  })
+);
 
 // Callback function
 function inputEventFunction(e) {
   const input = e.key || e.target.innerText;
+  //   btn.classList.add('click-active')
 
   // Calculate results
   if (input === "=" || input === "Enter") {

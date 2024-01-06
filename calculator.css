@@ -44,3 +44,7 @@
     font-size: large;
 }
 
+.click-active {
+    background-color: darkgray;
+}
+
